@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.product-list {
+    width: 75%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-item {
+    flex-basis: 25%;
+    padding: 20px;
+}
+
+.product-item > .container {
+    background: lightsalmon;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+ .cart {
+    width: 25%;
+    background: lightcoral;
+    min-height: 400px;
+ }
+.product-container {
+    display: flex;
+    padding: 20px;
+}
+.cart > .product-item {
+    flex-basis: 100%;
+}
