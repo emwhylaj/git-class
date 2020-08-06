@@ -152,4 +152,33 @@ const product = {
       cartProductsList,
       "cart-list"
     );
+    bindEvents();
+  }
+
+  
+function bindEvents() {
+    const addToCartButtons = document.getElementsByClassName("add");
+  
+    for (let i = 0; i < addToCartButtons.length; i++) {
+      if (addToCartButtons[i]) {
+        addToCartButtons[i].addEventListener("click", addToCart);
+      }
+    }
+    const removeButtons = document.getElementsByClassName("remove");
+    for (let i = 0; i < addToCartButtons.length; i++) {
+      if (removeButtons[i]) {
+        removeButtons[i].addEventListener("click", removeFromCart);
+      }
+    }
+  
+  }
+  
+  function removeFromCart() {
+    const productId = Number(event.target.dataset.id);
+  
+    const filteredCartProducts = cartProductsList.filter((item) => item.id !== productId)
+  
+    cartProductsList = filteredCartProducts;
+  
+    render();
   }
