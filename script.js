@@ -173,12 +173,45 @@ function bindEvents() {
   
   }
   
-  function removeFromCart() {
+  function addToCart(event) {
     const productId = Number(event.target.dataset.id);
   
-    const filteredCartProducts = cartProductsList.filter((item) => item.id !== productId)
   
-    cartProductsList = filteredCartProducts;
+    const product = allProducts.find((item) => item.id === productId);
   
+    let cartProductIndex;
+    const productFromCart = cartProductsList.find((item, index) => {
+  
+      cartProductIndex = index;
+      return item.id === productId;
+    });
+  
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    const productQuantity = Number(quantityInput.value) || 1;
+  
+    if (productFromCart) {
+      if (productFromCart.quantity + productQuantity >
+        product.numberInStock
+      ) {
+        return alert("the product is more than the stock value");
+      }
+      // update the product in the cart with the new selected quantity
+      productFromCart.quantity = productFromCart.quantity + productQuantity;
+      // update the selected product, increasing the quantity by the new selection
+      cartProductsList[cartProductIndex] = productFromCart;
+  
+      return render();
+    }
+  
+    if (product.numberInStock < productQuantity) {
+      return alert("the product is more than the stock value");
+    }
+  
+    const newCartProduct = {
+      ...product,
+      quantity: productQuantity,
+    };
+    cartProductsList.push(newCartProduct);
+    // cartProductsList.push(product);
     render();
   }
